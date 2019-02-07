@@ -80,6 +80,20 @@ require_once "Database.php" ;
 			return $usuarios ;
 		}
 
+		public static function getAllUsernames()
+		{
+			$bd = Database::getInstance() ;
+			$bd->doQuery("SELECT usuario FROM usuario ;") ;
+
+			$usuarios = [] ;
+
+			while ($usr = $bd->getRow("Usuario"))
+			{
+				array_push($usuarios, $usr->getUsuario()) ;
+			}
+			return $usuarios ;
+		}
+
 
 		public static function deleteUser($usr)
 		{

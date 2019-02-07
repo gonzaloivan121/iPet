@@ -1,6 +1,9 @@
 <?php
 
-	require_once "modelo/Mascota.php";
+	require_once "modelo/Mascota.php" ;
+	require_once "modelo/Raza.php" ;
+	require_once "modelo/Especie.php" ;
+	require_once "modelo/Usuario.php" ;
 
 	class controllerMascota
 	{
@@ -14,8 +17,21 @@
 		// y los muestra por pantalla
 		public function index()
 		{
-			$mascotas = Mascota::getAllMascotas(["usuario" => "xloxlolex"]) ;
-			require_once "vista/usuario/index.usuario.php" ;
+			if (isset($_GET["usuario"]))
+			{
+				$user = $_GET["usuario"] ;
+				$array = [
+					"usuario"	=> $user,
+					"idRaza" 	=> 1,
+					"idEspecie" => 1
+				];
+				$mascotas = Mascota::getAllMascotas($array) ;
+				print_r($mascotas) ;
+			} else {
+				$mascotas = Mascota::getAllMascotas() ;
+			}
+			
+			require_once "vista/mascota/index.mascota.php" ;
 		}
 
 		//
@@ -24,21 +40,29 @@
 		// caso, redirigimos al usuario al formulario de creación
 		public function create()
 		{
-			if (isset($_GET["usuario"]))
+			if (isset($_GET["nombre"]))
 			{
-				$usr = new Usuario() ;
-				$usr->setUsuario($_GET["usuario"]) ;
-				$usr->setEmail($_GET["email"]) ;
-				$usr->setContrasena($_GET["contrasena"]) ;
-				$usr->setNombre($_GET["nombre"]) ;
-				$usr->setEdad($_GET["edad"]) ;
-				$usr->setGenero($_GET["genero"]) ;
-				$usr->setImagen("/path/to/image") ;
+				$mas = new Mascota() ;
+				$mas->setUsuario($_GET["usuario"]) ;
+				$mas->setIdEspecie($_GET["ide"]) ;
+				$mas->setIdRaza($_GET["idr"]) ;
+				$mas->setNombre($_GET["nombre"]) ;
+				$mas->setGenero($_GET["genero"]) ;
+				$mas->setColor($_GET["color"]) ;
+				$mas->setImagen("/path/to/image") ;
 
-				$usr->insert() ;
+				?>
+					<pre>
+						<?= $mas ?>
+					</pre>
+				<?php
+
+				$mas->insert() ;
 				$this->index() ;
 			} else {
-				require_once "vista/usuario/create.usuario.php" ;
+				$razas = Raza::getAllRaces() ;
+				$especies = Especie::getAllSpecies() ;
+				require_once "vista/mascota/create.mascota.php" ;
 			}
 		}
 		

@@ -30,5 +30,9 @@
 			?>
 		</ul>
 
+		<h3>
+			<a href="/ipet/index.php?mod=mascota&ope=index">Ver todas las Mascotas</a>
+		</h3>
+
 	</body>
 </html>
