@@ -21,12 +21,9 @@
 			{
 				$user = $_GET["usuario"] ;
 				$array = [
-					"usuario"	=> $user,
-					"idRaza" 	=> 1,
-					"idEspecie" => 1
+					"usuario"	=> $user
 				];
 				$mascotas = Mascota::getAllMascotas($array) ;
-				print_r($mascotas) ;
 			} else {
 				$mascotas = Mascota::getAllMascotas() ;
 			}
@@ -50,12 +47,6 @@
 				$mas->setGenero($_GET["genero"]) ;
 				$mas->setColor($_GET["color"]) ;
 				$mas->setImagen("/path/to/image") ;
-
-				?>
-					<pre>
-						<?= $mas ?>
-					</pre>
-				<?php
 
 				$mas->insert() ;
 				$this->index() ;
@@ -81,6 +72,7 @@
 					$usr->setEdad($_GET["edad"]) ;
 					$usr->setGenero($_GET["genero"]) ;
 					$usr->setImagen($_GET["imagen"]) ;
+
 					$usr->update() ;
 					$this->index() ;
 				} else {
@@ -93,6 +85,20 @@
 					require_once "vista/usuario/update.usuario.php" ;
 				}
 			} else {
+				$this->index() ;
+			}
+		}
+
+		public function view() {
+			$idMascota = $_GET["idMascota"] ?? "" ;
+
+			if (!empty($idMascota)) {
+				$mascota = Mascota::getMascota($idMascota) ;
+				$usr = Usuario::getUser($_GET["usuario"]) ;
+				
+				require_once "vista/mascota/perfil.mascota.php" ;
+			} else {
+
 				$this->index() ;
 			}
 		}
@@ -111,4 +117,5 @@
 				$this->index() ;
 			}
 		}
+
 	}

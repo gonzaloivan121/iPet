@@ -14,8 +14,20 @@
 		// y los muestra por pantalla
 		public function index()
 		{
-			$usuarios = Usuario::getAllUsers() ;
-			require_once "vista/usuario/index.usuario.php" ;
+			if (isset($_GET["usuario"])) {
+				$usuario = Usuario::getUser($_GET["usuario"]) ;
+				$mascotas = Usuario::getPets($_GET["usuario"]) ;
+
+				session_start() ;
+
+				require_once "vista/usuario/profile.usuario.php" ;
+				
+			} else {
+				$usuarios = Usuario::getAllUsers() ;
+
+				require_once "vista/usuario/index.usuario.php" ;
+			}
+			
 		}
 
 		//
@@ -31,6 +43,7 @@
 				$usr->setEmail($_GET["email"]) ;
 				$usr->setContrasena($_GET["contrasena"]) ;
 				$usr->setNombre($_GET["nombre"]) ;
+				$usr->setIdRol(2) ;
 				$usr->setEdad($_GET["edad"]) ;
 				$usr->setGenero($_GET["genero"]) ;
 				$usr->setImagen("/path/to/image") ;
@@ -72,6 +85,7 @@
 				$this->index() ;
 			}
 		}
+
 
 		// Si se nos proporciona el identificador del tablero,
 		// procedemos a su borrado; en otro caso, regresamos

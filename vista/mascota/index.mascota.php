@@ -10,26 +10,26 @@
 		<?php
 			if (isset($_GET["usuario"])) {
 				$usu = Usuario::getUser($_GET["usuario"]) ;
-				echo "<h2>Mascotas de: ".$usu->getNombre()."</h2>" ;
+				echo "<h2>Mascotas de: ".$usu->getNombre()." (".$usu->getUsuario().")</h2>" ;
+				?>
+					<h3>
+						<a href="/ipet/index.php?mod=mascota&ope=create&usuario=<?=$_GET["usuario"]?>">Añadir nueva Mascota</a>
+					</h3>
+				<?php
 			} else {
 				echo "<h2>Todas las mascotas</h2>" ;
 			}
 		?>
-		<h3>
-			<a href="/ipet/index.php?mod=mascota&ope=create&usuario=<?=$_GET["usuario"]?>">Añadir nueva Mascota</a>
-		</h3>
-
 		<ul>
 			<?php
 				if (empty($mascotas)) {
 					echo "<h3>No hay ninguna mascota</h3>" ;
 				}
-
 				foreach ($mascotas as $pet) {
 					if (isset($_GET["usuario"])) {
 						?>
 							<li>
-								<?= $pet->getNombre() ; ?> - [
+								<a href="/ipet/index.php?mod=mascota&ope=view&idMascota=<?=$pet->getIdMascota()?>&usuario=<?=$_GET["usuario"]?>"><?= $pet->getNombre() ; ?></a> - [
 								<a href="/ipet/index.php?mod=mascota&ope=update&idMascota=<?=$pet->getIdMascota()?>">editar</a> |
 								<a href="/ipet/index.php?mod=mascota&ope=delete&idMascota=<?=$pet->getIdMascota()?>">borrar</a> ]
 							</li>

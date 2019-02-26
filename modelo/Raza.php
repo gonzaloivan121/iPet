@@ -7,6 +7,7 @@ require_once "Database.php" ;
 		// Atributos
 		private $idRaza  	;
 		private $nombre 	;
+		private $idEspecie	;
 
 		// Constructor
 		public function __construct()
@@ -15,11 +16,13 @@ require_once "Database.php" ;
 		}
 
 		// Getter
-		public function getIdRaza() { return $this->idRaza; }
-		public function getNombre() { return $this->nombre; }
+		public function getIdRaza() { return $this->idRaza    ; }
+		public function getNombre() { return $this->nombre    ; }
+		public function getIdEspe() { return $this->idEspecie ; }
 
 		// Setter
-		public function setNombre($nom) { $this->nombre = $nom; }
+		public function setNombre($nom) { $this->nombre    = $nom ; }
+		public function setIsEspe($ide) { $this->idEspecie = $ide ; }
 
 		// Métodos
 		public function insert()
@@ -53,6 +56,14 @@ require_once "Database.php" ;
 				array_push($razas, $raz) ;
 			}
 			return $razas ;
+		}
+
+
+		public static function getAllRacesSpecies($spe)
+		{
+			$bd = Database::getInstance() ;
+			$bd->doQuery("SELECT * FROM raza WHERE idEspecie=:esp ;",
+				[ ":esp" => $spe ]) ;
 		}
 
 
