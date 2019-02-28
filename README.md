@@ -22,7 +22,7 @@ Pantalla de inicio, sin ninguna sesión iniciada.
 <img src="screenshot/04 - Home_Logged.PNG" width="750px">
 Pantalla de inicio, con una sesión normal iniciada. 
 
-<img src="screenshot/04 - Home_Logged_Admin.PNG" width="750px">
+<img src="screenshot/05 - Home_Logged_Admin.PNG" width="750px">
 Pantalla de inicio, con una sesión de administrador iniciada.
 
 
