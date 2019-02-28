@@ -345,6 +345,10 @@ body.perfil .profile-image-container {
   margin-top: -167px; 
 }
 
+body.perfil .menu {
+  margin-top: 0px !important; 
+}
+
 body.perfil .profile-image-container img {
   border-radius: 50px;
   border: 2px solid white;
@@ -601,11 +605,17 @@ body.crud .volver {
 }
 
 body.crud .add-new {
-  margin-top: -40px;
+  margin-top: -50px;
   float: right;
 }
 
-body.crud .add-new a {
+body.crud .volver {
+  margin-top: -10px;
+  float: right;
+}
+
+body.crud .add-new a,
+body.crud .volver {
   text-decoration: none;
   background-color: #416f74;
   padding: 10px 20px;
@@ -615,6 +625,7 @@ body.crud .add-new a {
   transition: 0.2s ease-in;
 }
 
+body.crud .volver:hover,
 body.crud .add-new a:hover {
   background-color: #365e63;
   border: 1px solid #000000;
