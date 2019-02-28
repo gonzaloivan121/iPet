@@ -39,7 +39,6 @@ Pantalla de inicio de sesión.
 ### Registro
 
 Pantalla de registro.
-
 <img src="screenshot/02 - Signup.PNG" width="750px">
 
 
