@@ -2,19 +2,19 @@
 <html>
 	<head>
 		<title>iPet - Inicio de Sesión</title>
-		<link rel="stylesheet" type="text/css" href="/iPet/vista/css/style.css">
+		<link rel="stylesheet" type="text/css" href="vista/css/style.css">
 	</head>
 	<body class="formulario">
 		<div class="menu" id="menu">
 			<div class="left">
-				<a href="/ipet/index.php">Inicio</a>
+				<a href="index.php">Inicio</a>
 				<a href="#">News</a>
 				<a href="#">Contact</a>
 				<a href="#">About</a>
 			</div>
 			<div class="right">
 				<a href="#" class="active">Iniciar Sesión</a>
-				<a href="/ipet/index.php?mod=home&ope=signup">Registrarme</a>
+				<a href="index.php?mod=home&ope=signup">Registrarme</a>
 			</div>
 		</div>
 		
@@ -22,7 +22,7 @@
 			<div id="login">
 				<h3>Iniciar Sesión</h3>
 				
-				<form method="get" action="/ipet/index.php" name="login">
+				<form method="get" action="index.php" name="login">
 					<input type="hidden" name="mod" value="home">
 					<input type="hidden" name="ope" value="signin">
 
@@ -34,6 +34,11 @@
 
 					<input type="submit" class="button" value="Iniciar">
 				</form>
+				<?php
+					if ($error) {
+						echo '<div class="error-login"><p>Parece que tu nombre de usuario o email y/o contraseña son incorrectos. Inténtalo de nuevo</p></div>';
+					}
+				?>
 			</div>
 		</div>
 	</body>

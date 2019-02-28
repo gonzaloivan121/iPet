@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>iPet</title>
-		<link rel="stylesheet" type="text/css" href="/iPet/vista/css/style.css">
+		<link rel="stylesheet" type="text/css" href="vista/css/style.css">
 	</head>
 	<body class='perfil'>
 		<?php
@@ -10,8 +10,14 @@
 						?>
 						<div class="menu" id="menu">
 							<div class="left">
-								<a href="/ipet/index.php?mod=home&ope=index">Inicio</a>
-								<a href="/ipet/index.php?mod=home&ope=match">Match</a>
+								<a href="index.php?mod=home&ope=index">Inicio</a>
+								<?php
+									if (($_SESSION["sesion"] == "admin") || ($_SESSION["sesion"] == "admin@admin.com")) {
+										echo '<a href="index.php?mod=home&ope=admin">Administrar</a>' ;
+									} else {
+										echo '<a href="index.php?mod=home&ope=match&usuario='.$usuario->getUsuario().'>Match</a>' ;
+									}
+								?>
 								<a href="#">News</a>
 								<a href="#">Contact</a>
 								<a href="#">About</a>
@@ -38,15 +44,20 @@
 								<img class="thumbnail" src="assets/img/<?=$usuario->getUsuario()?>/<?=$usuario->getUsuario()?>_thumb.jpg" width="35px" />
 							</button>
 							<div class="dropdown-content">
-								<a href="/ipet/index.php?mod=usuario&ope=index&usuario=<?=$usuario->getUsuario()?>">Perfil</a>
-								<a href="/ipet/index.php?mod=home&ope=signout">Cerrar Sesión</a>
+								<a href="index.php?mod=usuario&ope=index&usuario=<?=$usuario->getUsuario()?>">Perfil</a>
+								<?php
+									if (($_SESSION["sesion"] == "admin") || ($_SESSION["sesion"] == "admin@admin.com")) {
+										echo '<a href="index.php?mod=home&ope=admin">Administrar</a>' ;
+									}
+								?>
+								<a href="index.php?mod=home&ope=signout">Cerrar Sesión</a>
 							</div>
 						</div>
 				<?php
 					} else { // if
 				?>
-					<a href="/ipet/index.php?mod=home&ope=signin">Iniciar Sesión</a>
-					<a href="/ipet/index.php?mod=home&ope=signup">Registrarme</a>
+					<a href="index.php?mod=home&ope=signin">Iniciar Sesión</a>
+					<a href="index.php?mod=home&ope=signup">Registrarme</a>
 				<?php
 					} // if
 				?>
@@ -101,8 +112,8 @@
 						<h3 class="subtitulo-1">¡Una red social pensada en los animales!</h3>
 						<h4 class="subtitulo-2">¿Qué deseas hacer?</h4>
 
-						<a href="/ipet/index.php?mod=home&ope=signin" class="home-button-L"><span>Iniciar Sesión</span></a>
-						<a href="/ipet/index.php?mod=home&ope=signup" class="home-button-R"><span>Registrarme</span></a>
+						<a href="index.php?mod=home&ope=signin" class="home-button-L"><span>Iniciar Sesión</span></a>
+						<a href="index.php?mod=home&ope=signup" class="home-button-R"><span>Registrarme</span></a>
 			<?php
 				} // if
 			?>			  

@@ -2,11 +2,13 @@
 	class Database
 	{
 		// Atributos
-		private $dbHost = "localhost" 	 ;
-		private $dbUser = "root"	  	 ;
-		private $dbPass = ""		  	 ;
-		private $dbPort = "3306"  		 ;
-		private $dbName = "ipet"		 ;
+
+		//be11166e5732ac:33c7823a@eu-cdbr-west-02.cleardb.net/heroku_618b704f5a7b41e?reconnect=true
+		private $dbHost = "eu-cdbr-west-02.cleardb.net" ;
+		private $dbUser = "be11166e5732ac"	  	 		;
+		private $dbPass = "33c7823a"		  	 		;
+		private $dbPort = "3306"  		 				;
+		private $dbName = "heroku_618b704f5a7b41e"		;
 
 		//
 		private static $prp = null	  	 ;
@@ -40,7 +42,7 @@
 				$this->dbUser,
 				$this->dbPass) ;
 			} catch (Exception $e) {
-				die ("Error en conectar la BBDD; ".$e) ;
+				die("Error en conectar la BBDD; ".$e) ;
 			}
 		}
 

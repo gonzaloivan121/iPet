@@ -18,18 +18,19 @@ require_once "Database.php" ;
 		// Getter
 		public function getIdRaza() { return $this->idRaza    ; }
 		public function getNombre() { return $this->nombre    ; }
-		public function getIdEspe() { return $this->idEspecie ; }
+		public function getIdEspecie() { return $this->idEspecie ; }
 
 		// Setter
 		public function setNombre($nom) { $this->nombre    = $nom ; }
-		public function setIsEspe($ide) { $this->idEspecie = $ide ; }
+		public function setIdEspecie($ide) { $this->idEspecie = $ide ; }
 
 		// Métodos
 		public function insert()
 		{
 			$bd = Database::getInstance() ;
-			$bd->doQuery("INSERT INTO raza(nombre) VALUES (:nom) ;",
-				[ ":nom" => $this->nombre ]) ;
+			$bd->doQuery("INSERT INTO raza(nombre, idEspecie) VALUES (:nom, :ide) ;",
+				[ ":nom" => $this->nombre,
+				  ":ide" => $this->idEspecie ]) ;
 
 			$this->idRaza = $bd->getLastId() ;
 		}
@@ -59,11 +60,29 @@ require_once "Database.php" ;
 		}
 
 
-		public static function getAllRacesSpecies($spe)
+		public static function getAllRacesFromSpecies($spe)
 		{
 			$bd = Database::getInstance() ;
 			$bd->doQuery("SELECT * FROM raza WHERE idEspecie=:esp ;",
 				[ ":esp" => $spe ]) ;
+
+			$razas = [] ;
+
+			while ($r = $bd->getRow("Raza")) {
+				array_push($razas, $r) ;
+			}
+
+			return $razas ;
+		}
+
+		public function getEspecie()
+		{
+			$bd = Database::getInstance() ;
+			$bd->doQuery("SELECT * FROM especie WHERE idEspecie=:ide ;",
+				[ ":ide" => $this->idEspecie ]
+			) ;
+
+			return $bd->getRow("Especie") ;
 		}
 
 

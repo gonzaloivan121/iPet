@@ -2,18 +2,18 @@
 <html>
 	<head>
 		<title>iPet - Registro</title>
-		<link rel="stylesheet" type="text/css" href="/iPet/vista/css/style.css">
+		<link rel="stylesheet" type="text/css" href="vista/css/style.css">
 	</head>
 	<body>
 		<div class="menu" id="menu">
 			<div class="left">
-				<a href="/ipet/index.php">Inicio</a>
+				<a href="index.php">Inicio</a>
 				<a href="#">News</a>
 				<a href="#">Contact</a>
 				<a href="#">About</a>
 			</div>
 			<div class="right">
-				<a href="/ipet/index.php?mod=home&ope=signin">Iniciar Sesión</a>
+				<a href="index.php?mod=home&ope=signin">Iniciar Sesión</a>
 				<a href="#" class="active">Registrarme</a>
 			</div>
 		</div>
@@ -21,7 +21,7 @@
 		<div class="container-form">
 			<div id="signup">
 				<h3>Registro</h3>
-				<form method="get" action="/ipet/index.php" name="signup">
+				<form method="get" action="index.php" name="signup">
 					<input type="hidden" name="mod" value="usuario">
 					<input type="hidden" name="ope" value="create">
 

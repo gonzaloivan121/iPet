@@ -9,11 +9,11 @@
 		<h1>Crear Nuevo Usuario</h1>
 
 		<h3>
-			<a href="/ipet/index.php">Volver Atrás</a>
+			<a href="index.php">Volver Atrás</a>
 		</h3>
 
 
-		<form action="/ipet/index.php?mod=usuario&ope=create" method="get" enctype="multipart/form-data">
+		<form action="index.php?mod=usuario&ope=create" method="get" enctype="multipart/form-data">
 			<input type="hidden" name="mod" value="<?=$_GET["mod"]?>">
 			<input type="hidden" name="ope" value="<?=$_GET["ope"]?>">
 			

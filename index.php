@@ -19,5 +19,8 @@
 	if (method_exists($cont, $ope)) {
 		$cont->$ope() ;
 	} else {
-		die("***ERROR: Se ha producido un error en la Aplicación.") ;
+		session_start();
+
+		require_once "vista/home/404.home.php" ;
+		//die("***ERROR: Se ha producido un error en la Aplicación.") ;
 	}

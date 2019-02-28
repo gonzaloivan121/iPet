@@ -9,11 +9,11 @@
 		<h1><?=$mascota->getNombre()?> - Mascota de <?=$usr->getNombre()?></h1>
 
 		<h3>
-			<a href="/ipet/index.php?mod=mascota&ope=index&usuario=<?=$_GET["usuario"]?>">Volver Atrás</a>
+			<a href="index.php?mod=mascota&ope=index&usuario=<?=$_GET["usuario"]?>">Volver Atrás</a>
 		</h3>
 
 
-		<form action="/ipet/index.php?mod=mascota&ope=create" method="get" enctype="multipart/form-data">
+		<form action="index.php?mod=mascota&ope=create" method="get" enctype="multipart/form-data">
 			<input type="hidden" name="mod" value="<?=$_GET["mod"]?>">
 			<input type="hidden" name="ope" value="<?=$_GET["ope"]?>">
 			<input type="hidden" name="usuario" value="<?=$_GET["usuario"]?>">

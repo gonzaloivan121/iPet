@@ -9,7 +9,7 @@
 		<h1>Añadir Nueva Mascota</h1>
 
 		<h3>
-			<a href="/ipet/index.php?mod=mascota&ope=index&usuario=<?=$_GET["usuario"]?>">Volver Atrás</a>
+			<a href="index.php?mod=mascota&ope=index&usuario=<?=$_GET["usuario"]?>">Volver Atrás</a>
 		</h3>
 
 

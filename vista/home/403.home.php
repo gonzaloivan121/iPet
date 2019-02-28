@@ -4,10 +4,11 @@
 		<title>iPet</title>
 		<link rel="stylesheet" type="text/css" href="vista/css/style.css">
 	</head>
-	<body class="inicio">
+
+	<body class="error-page">
 		<div class="menu" id="menu">
 			<div class="left">
-				<a href="#" class="active">Inicio</a>
+				<a href="index.php">Inicio</a>
 				<?php
 					if (isset($_SESSION["sesion"])) {
 
@@ -49,38 +50,10 @@
 			</div>
 		</div>
 
-		<div class="container">
-			<?php
-				if (isset($_SESSION["sesion"])) {
-					?>
-						<?php
-							echo ($usuario->getGenero() == "masculino") ? "<h1 class='titulo'>Bienvenido a iPet</h1>" : "<h1 class='titulo'>Bienvenida a iPet</h1>";
-						?>
-						
-						<h3 class="subtitulo-1">¡Una red social pensada en los animales!</h3>
-						<h4 class="subtitulo-2">¿Qué tal el día, <?=$usuario->getNombre()?>?</h4>
-
-						<?php
-							if (($_SESSION["sesion"] == "admin") || ($_SESSION["sesion"] == "admin@admin.com")) {
-								echo '<a href="index.php?mod=home&ope=admin" class="home-button-R"><span>Administrar</span></a>' ;
-							} else {
-								echo '<a href="index.php?mod=home&ope=match&usuario=<?=$usuario->getUsuario()?>" class="home-button-R"><span>Jugar Match</span></a>' ;
-							}
-						?>
-						
-
-					<?php
-				} else {
-					?>
-						<h1 class="titulo">Bienvenido/a a iPet</h1>
-						<h3 class="subtitulo-1">¡Una red social pensada en los animales!</h3>
-						<h4 class="subtitulo-2">¿Qué deseas hacer?</h4>
-
-						<a href="index.php?mod=home&ope=signin" class="home-button-L"><span>Iniciar Sesión</span></a>
-						<a href="index.php?mod=home&ope=signup" class="home-button-R"><span>Registrarme</span></a>
-					<?php
-				}
-			?>			  
+		<div class="fondo"></div>
+		<div class="contenedor">
+			<h1>403</h1>
+			<h2>UNAUTHORIZED</h2>
 		</div>
 	</body>
 </html>

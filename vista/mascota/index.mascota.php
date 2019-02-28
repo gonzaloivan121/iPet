@@ -13,7 +13,7 @@
 				echo "<h2>Mascotas de: ".$usu->getNombre()." (".$usu->getUsuario().")</h2>" ;
 				?>
 					<h3>
-						<a href="/ipet/index.php?mod=mascota&ope=create&usuario=<?=$_GET["usuario"]?>">Añadir nueva Mascota</a>
+						<a href="index.php?mod=mascota&ope=create&usuario=<?=$_GET["usuario"]?>">Añadir nueva Mascota</a>
 					</h3>
 				<?php
 			} else {
@@ -29,17 +29,17 @@
 					if (isset($_GET["usuario"])) {
 						?>
 							<li>
-								<a href="/ipet/index.php?mod=mascota&ope=view&idMascota=<?=$pet->getIdMascota()?>&usuario=<?=$_GET["usuario"]?>"><?= $pet->getNombre() ; ?></a> - [
-								<a href="/ipet/index.php?mod=mascota&ope=update&idMascota=<?=$pet->getIdMascota()?>">editar</a> |
-								<a href="/ipet/index.php?mod=mascota&ope=delete&idMascota=<?=$pet->getIdMascota()?>">borrar</a> ]
+								<a href="index.php?mod=mascota&ope=view&idMascota=<?=$pet->getIdMascota()?>&usuario=<?=$_GET["usuario"]?>"><?= $pet->getNombre() ; ?></a> - [
+								<a href="index.php?mod=mascota&ope=update&idMascota=<?=$pet->getIdMascota()?>">editar</a> |
+								<a href="index.php?mod=mascota&ope=delete&idMascota=<?=$pet->getIdMascota()?>">borrar</a> ]
 							</li>
 						<?php
 					} else {
 						?>
 							<li>
 								<?= $pet->getNombre() ; ?> (<?= $pet->getUsuario() ; ?>) - [
-								<a href="/ipet/index.php?mod=mascota&ope=update&idMascota=<?=$pet->getIdMascota()?>">editar</a> |
-								<a href="/ipet/index.php?mod=mascota&ope=delete&idMascota=<?=$pet->getIdMascota()?>">borrar</a> ]
+								<a href="index.php?mod=mascota&ope=update&idMascota=<?=$pet->getIdMascota()?>">editar</a> |
+								<a href="index.php?mod=mascota&ope=delete&idMascota=<?=$pet->getIdMascota()?>">borrar</a> ]
 							</li>
 						<?php
 					} // end if
@@ -48,7 +48,7 @@
 		</ul>
 
 		<h3>
-			<a href="/ipet/index.php?mod=usuario&ope=index">Volver atrás</a>
+			<a href="index.php?mod=usuario&ope=index">Volver atrás</a>
 		</h3>
 	</body>
 </html>

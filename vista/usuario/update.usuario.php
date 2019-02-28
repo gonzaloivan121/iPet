@@ -9,11 +9,11 @@
 		<h1>Editar Usuario</h1>
 
 		<h3>
-			<a href="/ipet/index.php">Volver Atrás</a>
+			<a href="index.php">Volver Atrás</a>
 		</h3>
 
 
-		<form action="/ipet/index.php?mod=usuario&ope=update&usuario=<?= $usrName ?>" method="get">
+		<form action="index.php?mod=usuario&ope=update&usuario=<?= $usrName ?>" method="get">
 			<input type="hidden" name="mod" value="<?=$_GET["mod"]?>">
 			<input type="hidden" name="ope" value="<?=$_GET["ope"]?>">
 

@@ -48,34 +48,378 @@
 
 
 
-		public function signin()
-		{
-			if (isset($_GET["usuario"]) && isset($_GET["password"]))
-			{
-				/*$get = explode("@", $_GET["usuario"]) ;
-
-				if ((sizeOf($get) == 1)) {
-
-					$username = $_GET["usuario"] ;
-					$usuario = Usuario::getUserByUserPassword($username, $_GET["password"]) ;
-				} else {
-
-					$email = $_GET["usuario"] ;
-					$usuario = Usuario::getUserByEmailPassword($email, $_GET["password"]) ;
-				}*/
+		public function signin() {
+			if (isset($_GET["usuario"]) && isset($_GET["password"])) {
 
 				$usuario = Usuario::login($_GET["usuario"], $_GET["password"]) ;
 
-				//require_once "vista/home/index.home.php" ;
+				if ($usuario == 0) {
 
-				$this->index() ;
-				
+					$error = true ;
+
+					require_once "vista/usuario/signin.usuario.php" ;
+
+				} else {
+
+					session_start() ;
+					$this->index() ;
+				}
 			} else {
+
 				require_once "vista/usuario/signin.usuario.php" ;
 			}
 		}
 
 
+
+		// Si no hay sesión iniciada, o el usuario no es el administradir
+		// mostrar mensaje de error, y si es el administrador, enviar al CRUD
+		public function admin() {
+			session_start() ;
+			// Si existe la sesión activa
+			if (isset($_SESSION["sesion"])) {
+				// Si es el admin
+				if (($_SESSION["sesion"] == "admin") || ($_SESSION["sesion"] == "admin@admin.com")) {
+					$admin = Usuario::getUser($_SESSION["sesion"]) ;
+
+					// Si obtenemos por $_GET el parámetro "view"
+					if (isset($_GET["view"]) && !empty($_GET["view"])) {
+						// Si existe la vista de admin pasada por "view"
+						if (file_exists("vista/usuario/admin/".$_GET["view"]."/index.".$_GET["view"].".admin.php")) {
+							// Si existe el método a ejecutar
+							if (isset($_GET["exec"]) && !empty($_GET["exec"])) {
+								// Mostrar vista requerida
+								if (file_exists("vista/usuario/admin/".$_GET["view"]."/".$_GET["exec"].".".$_GET["view"].".admin.php")) {
+
+
+									switch ($_GET["view"]) {
+										case 'usuarios':
+											
+											if ($_GET["exec"] == "create") {
+
+												if (isset($_GET["usuario"]) && !empty($_GET["usuario"])) {
+
+													$user = new Usuario();
+													$user->setUsuario($_GET["usuario"]) ;
+													$user->setEmail($_GET["email"]) ;
+													$user->setContrasena($_GET["password"]) ;
+													$user->setNombre($_GET["nombre"]) ;
+													$user->setIdRol($_GET["rol"]) ;
+													$user->setEdad($_GET["edad"]) ;
+													$user->setGenero($_GET["genero"]) ;
+													$user->setImagen("/path/to/image") ;
+
+													$user->insert() ;
+
+													require_once "vista/usuario/admin/".$_GET["view"]."/index.".$_GET["view"].".admin.php" ;
+
+												} else {
+													require_once "vista/usuario/admin/".$_GET["view"]."/".$_GET["exec"].".".$_GET["view"].".admin.php" ;
+												}
+
+											} elseif ($_GET["exec"] == "update") {
+												
+												if (isset($_GET["usuario"]) && !empty($_GET["usuario"])) {
+
+													$user = Usuario::getUser($_GET["usuario"]) ;
+
+													if (isset($_GET["email"]) && !empty($_GET["email"])) {
+
+														$user->setEmail($_GET["email"]) ;
+														$user->setContrasena($_GET["password"]) ;
+														$user->setNombre($_GET["nombre"]) ;
+														$user->setIdRol($_GET["rol"]) ;
+														$user->setEdad($_GET["edad"]) ;
+														$user->setGenero($_GET["genero"]) ;
+														$user->setImagen($_GET["imagen"]) ;
+
+														$user->update() ;
+
+														require_once "vista/usuario/admin/".$_GET["view"]."/index.".$_GET["view"].".admin.php" ;
+
+													} else {
+														$usu = $user->getUsuario() ;
+														$ema = $user->getEmail() ;
+														$pwd = $user->getContrasena() ;
+														$nom = $user->getNombre() ;
+														$rol = $user->getIdRol() ;
+														$eda = $user->getEdad() ;
+														$gen = $user->getGenero() ;
+														$ima = $user->getImagen() ;
+
+														require_once "vista/usuario/admin/".$_GET["view"]."/update.".$_GET["view"].".admin.php" ;
+													}
+
+												} else {
+													require_once "vista/usuario/admin/".$_GET["view"]."/".$_GET["exec"].".".$_GET["view"].".admin.php" ;
+												}
+
+											} elseif ($_GET["exec"] == "delete") {
+
+												if (isset($_GET["usuario"]) && !empty($_GET["usuario"])) {
+
+													Usuario::deleteUser($_GET["usuario"]) ;
+
+													require_once "vista/usuario/admin/".$_GET["view"]."/index.".$_GET["view"].".admin.php" ;
+
+												} else {
+													require_once "vista/usuario/admin/".$_GET["view"]."/index.".$_GET["view"].".admin.php" ;
+												}
+											}
+
+											break;
+										
+
+
+
+
+										case "mascotas":
+											
+
+											if ($_GET["exec"] == "create") {
+
+												if (isset($_GET["nombre"]) && !empty($_GET["nombre"])) {
+
+													$pet = new Mascota();
+													$pet->setUsuario($_GET["usuario"]) ;
+													$pet->setIdEspecie($_GET["ide"]) ;
+													$pet->setIdRaza($_GET["idr"]) ;
+													$pet->setNombre($_GET["nombre"]) ;
+													$pet->setGenero($_GET["genero"]) ;
+													$pet->setColor($_GET["color"]) ;
+
+													$pet->insert() ;
+
+													require_once "vista/usuario/admin/".$_GET["view"]."/index.".$_GET["view"].".admin.php" ;
+
+												} else {
+
+													$user = Usuario::getUser($_GET["usuario"]) ;
+													
+													require_once "vista/usuario/admin/".$_GET["view"]."/".$_GET["exec"].".".$_GET["view"].".admin.php" ;
+												}
+
+											} elseif ($_GET["exec"] == "update") {
+												
+												if (isset($_GET["idm"]) && !empty($_GET["idm"])) {
+
+													$pet = Mascota::getMascota($_GET["idm"]) ;
+
+													if (isset($_GET["nombre"]) && !empty($_GET["nombre"])) {
+
+														$pet->setIdEspecie($_GET["ide"]) ;
+														$pet->setIdRaza($_GET["idr"]) ;
+														$pet->setNombre($_GET["nombre"]) ;
+														$pet->setGenero($_GET["genero"]) ;
+														$pet->setColor($_GET["color"]) ;
+
+														$pet->update() ;
+
+														require_once "vista/usuario/admin/".$_GET["view"]."/index.".$_GET["view"].".admin.php" ;
+
+													} else {
+														$usu = $pet->getUsuario() ;
+														$ide = $pet->getIdEspecie() ;
+														$idr = $pet->getIdRaza() ;
+														$nom = $pet->getNombre() ;
+														$gen = $pet->getGenero() ;
+														$col = $pet->getColor() ;
+
+														require_once "vista/usuario/admin/".$_GET["view"]."/update.".$_GET["view"].".admin.php" ;
+													}
+
+												} else {
+													require_once "vista/usuario/admin/".$_GET["view"]."/".$_GET["exec"].".".$_GET["view"].".admin.php" ;
+												}
+
+											} elseif ($_GET["exec"] == "delete") {
+
+												if (isset($_GET["idm"]) && !empty($_GET["idm"])) {
+
+													Mascota::deleteMascota($_GET["idm"]) ;
+
+													require_once "vista/usuario/admin/".$_GET["view"]."/index.".$_GET["view"].".admin.php" ;
+
+												} else {
+													require_once "vista/usuario/admin/".$_GET["view"]."/index.".$_GET["view"].".admin.php" ;
+												}
+											}
+
+											break;
+
+
+
+
+
+
+
+										case 'especies':
+											
+											if ($_GET["exec"] == "create") {
+
+												if (isset($_GET["nombre"]) && !empty($_GET["nombre"])) {
+
+													$esp = new Especie();
+													$esp->setNombre($_GET["nombre"]) ;
+
+													$esp->insert() ;
+
+													require_once "vista/usuario/admin/".$_GET["view"]."/index.".$_GET["view"].".admin.php" ;
+
+												} else {
+
+													$user = Usuario::getUser($_GET["usuario"]) ;
+													
+													require_once "vista/usuario/admin/".$_GET["view"]."/".$_GET["exec"].".".$_GET["view"].".admin.php" ;
+												}
+
+											} elseif ($_GET["exec"] == "update") {
+												
+												if (isset($_GET["ide"]) && !empty($_GET["ide"])) {
+
+													$esp = Especie::getSpecies($_GET["ide"]) ;
+
+													if (isset($_GET["nombre"]) && !empty($_GET["nombre"])) {
+
+														$esp->setNombre($_GET["nombre"]) ;
+
+														$esp->update() ;
+
+														require_once "vista/usuario/admin/".$_GET["view"]."/index.".$_GET["view"].".admin.php" ;
+
+													} else {
+														$nom = $esp->getNombre() ;
+														$ide = $esp->getIdEspecie() ;
+
+														require_once "vista/usuario/admin/".$_GET["view"]."/update.".$_GET["view"].".admin.php" ;
+													}
+
+												} else {
+													require_once "vista/usuario/admin/".$_GET["view"]."/".$_GET["exec"].".".$_GET["view"].".admin.php" ;
+												}
+
+											} elseif ($_GET["exec"] == "delete") {
+
+												if (isset($_GET["ide"]) && !empty($_GET["ide"])) {
+
+													Especie::deleteSpecies($_GET["ide"]) ;
+
+													require_once "vista/usuario/admin/".$_GET["view"]."/index.".$_GET["view"].".admin.php" ;
+
+												} else {
+													require_once "vista/usuario/admin/".$_GET["view"]."/index.".$_GET["view"].".admin.php" ;
+												}
+											}
+
+											break;
+
+										case 'razas':
+											
+
+
+											if ($_GET["exec"] == "create") {
+
+												if (isset($_GET["nombre"]) && !empty($_GET["nombre"])) {
+
+													$raz = new Raza();
+													$raz->setNombre($_GET["nombre"]) ;
+													$raz->setIdEspecie($_GET["ide"]) ;
+
+													$raz->insert() ;
+
+													print_r($raz) ;
+
+													require_once "vista/usuario/admin/".$_GET["view"]."/index.".$_GET["view"].".admin.php" ;
+
+												} else {
+
+													$specie = Especie::getSpecies($_GET["ide"]) ;
+													$especies = Especie::getAllSpecies() ;
+													
+													require_once "vista/usuario/admin/".$_GET["view"]."/".$_GET["exec"].".".$_GET["view"].".admin.php" ;
+												}
+
+											} elseif ($_GET["exec"] == "update") {
+												
+												if (isset($_GET["idr"]) && !empty($_GET["idr"])) {
+
+													$raz = Raza::getRace($_GET["idr"]) ;
+
+													if (isset($_GET["nombre"]) && !empty($_GET["nombre"])) {
+
+														$raz->setIdEspecie($_GET["ide"]) ;
+														$raz->setNombre($_GET["nombre"]) ;
+
+														$raz->update() ;
+
+														require_once "vista/usuario/admin/".$_GET["view"]."/index.".$_GET["view"].".admin.php" ;
+
+													} else {
+														$idr = $raz->getIdRaza() ;
+														$ide = $raz->getIdEspecie() ;
+														$nom = $raz->getNombre() ;
+														$especies = Especie::getAllSpecies() ;
+
+														require_once "vista/usuario/admin/".$_GET["view"]."/update.".$_GET["view"].".admin.php" ;
+													}
+
+												} else {
+													require_once "vista/usuario/admin/".$_GET["view"]."/".$_GET["exec"].".".$_GET["view"].".admin.php" ;
+												}
+
+											} elseif ($_GET["exec"] == "delete") {
+
+												if (isset($_GET["idr"]) && !empty($_GET["idr"])) {
+
+													Raza::deleteRace($_GET["idr"]) ;
+
+													require_once "vista/usuario/admin/".$_GET["view"]."/index.".$_GET["view"].".admin.php" ;
+
+												} else {
+													require_once "vista/usuario/admin/".$_GET["view"]."/index.".$_GET["view"].".admin.php" ;
+												}
+											}
+
+
+
+											break;
+									}
+
+									
+								} else {
+									require_once "vista/usuario/admin/".$_GET["view"]."/index.".$_GET["view"].".admin.php" ;
+								}
+								
+							} else {
+								// Mostrar vista requerida
+								require_once "vista/usuario/admin/".$_GET["view"]."/index.".$_GET["view"].".admin.php" ;
+							}
+						// Si no existe la vista
+						} else {
+							// Mostrar el index del admin
+							require_once "vista/usuario/admin/index.admin.php" ;
+						}
+					// Si no obtenemos "view"
+					} else {
+						// Mostrar el index del admin
+						require_once "vista/usuario/admin/index.admin.php" ;
+					}
+				// Si no es el admin
+				} else {
+					$usuario = Usuario::getUser($_SESSION["sesion"]) ;
+					print_r("<div class='header-error'>Error, el usuario '".$usuario->getUsuario()."' no tiene permisos para ver este contenido.</div>") ;
+					require_once "vista/home/403.home.php" ;
+				}
+			// Si no hay sesión activa
+			} else {
+				print_r("<div class='header-error'>No tienes permisos para ver este contenido.</div>") ;
+				require_once "vista/home/403.home.php" ;
+			}
+		}
+
+
+
+		// Cierra y destruye la sesión
 		public function signout() {
 			session_start() ;
 

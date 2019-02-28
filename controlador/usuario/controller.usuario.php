@@ -14,13 +14,20 @@
 		// y los muestra por pantalla
 		public function index()
 		{
+			session_start() ;
+
 			if (isset($_GET["usuario"])) {
-				$usuario = Usuario::getUser($_GET["usuario"]) ;
-				$mascotas = Usuario::getPets($_GET["usuario"]) ;
+				if (isset($_SESSION["sesion"] )) {
+					if (($_SESSION["sesion"] == "admin") || ($_SESSION["sesion"] == "admin@admin.com")) {
+						
+					} else {
+						
+					}
+					$usuario = Usuario::getUser($_GET["usuario"]) ;
+					$mascotas = Usuario::getPets($_GET["usuario"]) ;
 
-				session_start() ;
-
-				require_once "vista/usuario/profile.usuario.php" ;
+					require_once "vista/usuario/profile.usuario.php" ;
+				}
 				
 			} else {
 				$usuarios = Usuario::getAllUsers() ;
@@ -101,4 +108,10 @@
 				$this->index() ;
 			}
 		}
+
+
+
+
+		// Poderes de Administrador
+		//public function us
 	}

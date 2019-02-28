@@ -12,7 +12,7 @@ require_once "Database.php" ;
 		private $nombre 	;
 		private $genero 	;
 		private $color 		;
-		private $imagen 	;
+		private $imagen 	= "/path/to/image" ;
 
 		// Constructor
 		public function __construct() {}
@@ -111,9 +111,49 @@ require_once "Database.php" ;
 		{
 			$bd = Database::getInstance() ;
 			$bd->doQuery("SELECT * FROM mascota WHERE idMascota=:idm ;",
-				[ ":idm" => $idm ]) ;
+				[ ":idm" => $idm ]
+			) ;
 
 			return $bd->getRow("Mascota") ;
+		}
+
+
+		public function getEspecie()
+		{
+			$bd = Database::getInstance() ;
+			$bd->doQuery("SELECT * FROM especie WHERE idEspecie=:ide ;",
+				[ ":ide" => $this->idEspecie ]
+			) ;
+
+			return $bd->getRow("Especie") ;
+		}
+
+		public function getRaza()
+		{
+			$bd = Database::getInstance() ;
+			$bd->doQuery("SELECT * FROM raza WHERE idRaza=:idr ;",
+				[ ":idr" => $this->idRaza ]
+			) ;
+
+			return $bd->getRow("Raza") ;
+		}
+
+
+		public static function getAllMascotasFromUser($usr)
+		{
+			$bd = Database::getInstance() ;
+			$bd->doQuery("SELECT * FROM mascota WHERE usuario=:usr ;",
+				[ ":usr" => $usr ]
+			) ;
+
+			$mascotas = [] ;
+
+			while ($mas = $bd->getRow("Mascota"))
+			{
+				array_push($mascotas, $mas) ;
+			}
+
+			return $mascotas ;
 		}
 
 

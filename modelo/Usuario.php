@@ -10,10 +10,10 @@ require_once "Mascota.php"  ;
 		private $email 		;
 		private $contrasena ;
 		private $nombre 	;
-		private $idRol		;
+		private $idRol		= 2 ;
 		private $edad 		;
 		private $genero 	;
-		private $imagen 	;
+		private $imagen 	= "/path/to/image" ;
 
 		// Constructor
 		public function __construct()
@@ -153,39 +153,47 @@ require_once "Mascota.php"  ;
 			$ok = false ;
 			$usu ;
 
-			while ($usu = $bd->getRow("Usuario")) {
+			if ($usu = $bd->getRow("Usuario")) {
 				$ok = true ;
 			}
 
 			if ($ok == true) {
+				session_start() ;
+
 				$_SESSION["sesion"] = $username ;
 
 				return $usu ;
 			} else {
-				echo '<div class="alert alert-danger">Oops! It looks like your username and/or password are incorrect. Please try again.</div>';
 
 				return 0 ;
 			}
-
-			
 		}
-
-
+		
 
 
 
 		public static function deleteUser($usr)
 		{
 			$bd = Database::getInstance() ;
-			$bd->doQuery("DELETE FROM usuario WHERE usuario=:usr ;",
-				[ ":usr" => $usr ]) ;
+			$query = "DELETE FROM usuario WHERE usuario=:usr ;" ;
+			$bd->doQuery($query,
+				[ ":usr" => $usr ]
+			) ;
+
 		}
 
 
 		public static function getUser($usr) {
+			$get = explode("@", $usr);
 			$bd = Database::getInstance() ;
-			$bd->doQuery("SELECT * FROM usuario WHERE usuario=:usr ;",
-				[ ":usr" => $usr ]) ;
+
+			if ((sizeOf($get) > 1)) {
+				$bd->doQuery("SELECT * FROM usuario WHERE email=:ema ;",
+					[ ":ema" => $usr ]) ;
+			} else {
+				$bd->doQuery("SELECT * FROM usuario WHERE usuario=:usu ;",
+					[ ":usu" => $usr ]) ;
+			}
 
 			return $bd->getRow("Usuario") ;
 		}

@@ -2,6 +2,10 @@
 .menu {
   background-color: #333;
   height: 47px;
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+  margin-top: -47px;
 }
 
 .menu .left a,
@@ -17,7 +21,7 @@
 }
 
 .menu .left a {
-  width: 50px;
+  width: 80px;
 }
 
 .menu .right a {
@@ -225,9 +229,9 @@ form input[type="password"] {
 }
 
 body {
-  width: 100vw;
   height: 100vh;
   margin: 0;
+  margin-top: 47px;
 }
 body.inicio, body.formulario {
   overflow: hidden;
@@ -309,6 +313,11 @@ h4.subtitulo-2 {
   border: 1px solid #68819c;
 }
 
+.error-login {
+  color: red;
+  text-align: center;
+}
+
 .home-button-L:hover, 
 .home-button-R:hover {
   background-color: #8eaab9;
@@ -354,6 +363,281 @@ body.perfil .profile-image-container h2 {
 /* PERFIL */
 
 
+
+/* ERROR */
+body.error-page {
+  text-align: center;
+  overflow: hidden;
+}
+
+body.error-page .fondo {
+  background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url("../../assets/img/background.jpg");
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  height: 100vh;
+  filter: brightness(0.8);
+}
+
+body.error-page .contenedor {
+    position: absolute;
+    top: 28%;
+    height: 100vh;
+    width: 100vw;
+}
+
+body.error-page h1,
+body.error-page h2 {
+    color: white;
+    text-shadow: 0px 0px 25px rgba(255, 255, 255, 0.3);
+}
+
+body.error-page h1 {
+    font-size: 120px;
+    margin-bottom: 0px;
+}
+
+body.error-page h2 {
+    font-size: 30px;
+}
+
+body.error-page .header-error {
+    position: absolute;
+    top: 47px;
+    z-index: 1;
+    width: 100vw;
+    height: 30px;
+    line-height: 30px;
+    color: red;
+    background-color: rgba(255,255,255,0.5);
+}
+/* ERROR */
+
+
+
+/* ADMIN */
+body.admin {
+  overflow: hidden;
+}
+
+body.admin .menu {
+  -webkit-box-shadow: 0px 2px 10px 0px rgba(51,51,51,0.75);
+  -moz-box-shadow: 0px 2px 10px 0px rgba(51,51,51,0.75);
+  box-shadow: 0px 2px 10px 0px rgba(51,51,51,0.75);
+}
+
+body.admin .contenedor {
+ /* width: 100vw;
+  height: 100vh;*/
+  padding: 50px;
+}
+
+body.admin .contenedor .row:before,
+body.admin .contenedor .row:after {
+  display: table;
+  content: " ";
+}
+
+body.admin .contenedor .row {
+  text-align: center;
+}
+
+body.admin .contenedor .row .col {
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 100%;
+  float: left;
+}
+
+body.admin .contenedor .row .col p {
+  margin: 0 0 10px;
+  margin-bottom: 25px;
+}
+
+body.admin .contenedor .row .col p a {
+  width: 100% !important;
+  height: 230px !important;
+  line-height: 230px !important;
+  font-size: 30px;
+  color: #fff;
+  text-decoration: none;
+}
+
+body.admin .contenedor .row .col p a:first-child {
+  margin-right: 10px !important;
+}
+
+body.admin .contenedor .row .col p .button {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border-radius: 4px;
+  max-width: 350px !important;
+  background-color: #416f74 !important;
+  border: 1px solid #365e63 !important;
+  transition: 0.2s ease-in !important;
+}
+
+body.admin .contenedor .row .col p .button:hover {
+  background-color: #365e63 !important;
+  border: 1px solid #416f74 !important;
+  transition: 0.2s ease-in !important;
+}
+
+body.admin .contenedor table {
+  text-align: left;
+  width: 100%;
+  padding-right: 20px;
+  padding-bottom: 75px;
+}
+
+body.admin .contenedor table th {
+  /*text-align: center !important;*/
+}
+
+body.admin .contenedor table tr th:first-child, 
+body.admin .contenedor table tr td:first-child {
+  text-align: center !important;
+  width: 115px;
+}
+
+body.crud {
+  overflow: auto !important;
+  overflow-x: hidden !important;
+}
+
+body.crud table tr.lighter {
+  background-color: #DDDDDD;
+}
+
+body.crud table {
+  border-spacing: 0px !important;
+}
+
+body.crud table td {
+ height: 51px !important;
+}
+
+body.crud table img {
+  padding-top: 5px;
+}
+
+body.crud table .boton {
+  padding: 16px 6px 4px 6px;
+  border-radius: 5px;
+}
+
+body.crud table .ver {
+  background-color: #1d985e;
+  border: 1px solid #246d4a;
+  transition: 0.2s ease-in;
+}
+
+body.crud table .ver:hover {
+  background-color: #1a774b;
+  border: 1px solid #1d985e;
+  transition: 0.2s ease-in;
+}
+
+body.crud table .editar {
+  background-color: #5499a0;
+  border: 1px solid #44838a;
+  transition: 0.2s ease-in;
+}
+
+body.crud table .editar:hover {
+  background-color: #416f74;
+  border: 1px solid #5499a0;
+  transition: 0.2s ease-in;
+}
+
+body.crud table .borrar {
+  background-color: #cc2f2f;
+  border: 1px solid #b70000;
+  transition: 0.2s ease-in;
+}
+
+body.crud table .borrar:hover {
+  background-color: #ad2929;
+  border: 1px solid #cc2f2f;
+  transition: 0.2s ease-in;
+}
+
+body.crud table .boton img {
+  padding-top: 0px !important;
+  width: 25px !important;
+}
+
+body.crud table tr th:last-child {
+  width: 150px;
+  text-align: center;
+}
+
+body.crud table .botones-container {
+  text-align: center;
+}
+
+body.crud .sin-mascotas {
+  text-align: center;
+}
+
+body.crud .volver {
+  text-align: center;
+}
+
+body.crud .add-new {
+  margin-top: -40px;
+  float: right;
+}
+
+body.crud .add-new a {
+  text-decoration: none;
+  background-color: #416f74;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: white;
+  border: 1px solid #000000;
+  transition: 0.2s ease-in;
+}
+
+body.crud .add-new a:hover {
+  background-color: #365e63;
+  border: 1px solid #000000;
+  transition: 0.2s ease-in;
+}
+
+body.create form select {
+  width: 82% !important;
+}
+
+body.create form input[type="submit"] {
+  height: 30px;
+  margin-top: 30px !important;
+  width: 82% !important;
+}
+
+
+
+
+
+
+
+/* ADMIN */
 
 
 
