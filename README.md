@@ -8,9 +8,36 @@ Proyecto realizado en PHP utilizado el Modelo Vista Controlador.
 Mi idea era una aplicación en la que los usuarios pudieran añadir mascotas y que funcione como una app de citas, pero dedicado a las mascotas. Como puede ser un paseo juntos por el parque.
 
 
+## Manual de Uso
+
+La aplicación es muy fácil de usar. Tiene un inicio, en el cual te puedes registrar o iniciar sesión si ya tienes una cuenta.
+Los usuarios normales no tienen mucha funcionalidad.
+En cambio el administrador puede entrar en un CRUD de administración, en el cual se muestran todos los datos de la aplicación.
+Existe un bloqueo para que los usuarios que no tengan permisos, no puedan acceder al área administrativa. (403)
+También existe un método el cual muestra una página de error 404 cuando se intruoduce un método que no exista.
+
+
 ## Páginas
 
-A continuación incluyo capturas de pantalla del diseño y la movilidad de la web. 
+A continuación incluyo capturas de pantalla del diseño y la movilidad de la web.
+
+
+
+### 403
+
+Página de Error 403 (Sesión no iniciada)
+<img src="screeenshot/15 - 403_Sin_Sesion.PNG" width="750px">
+
+
+Página de Error 403 (Sesión iniciada)
+<img src="screeenshot/16 - 403_Sesion.PNG" width="750px">
+
+
+
+### 404
+
+Página de Error 404 (Página no encontrada)
+<img src="screeenshot/17 - 404.PNG" width="750px">
 
 
 
