@@ -26,18 +26,18 @@ A continuación incluyo capturas de pantalla del diseño y la movilidad de la we
 ### 403
 
 Página de Error 403 (Sesión no iniciada)
-<img src="screeenshot/15 - 403_Sin_Sesion.PNG" width="750px">
+<img src="screenshot/15 - 403_Sin_Sesion.PNG" width="750px">
 
 
 Página de Error 403 (Sesión iniciada)
-<img src="screeenshot/16 - 403_Sesion.PNG" width="750px">
+<img src="screenshot/16 - 403_Sesion.PNG" width="750px">
 
 
 
 ### 404
 
 Página de Error 404 (Página no encontrada)
-<img src="screeenshot/17 - 404.PNG" width="750px">
+<img src="screenshot/17 - 404.PNG" width="750px">
 
 
 
