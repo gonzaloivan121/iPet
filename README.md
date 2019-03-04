@@ -14,7 +14,7 @@ La aplicación es muy fácil de usar. Tiene un inicio, en el cual te puedes regi
 Los usuarios normales no tienen mucha funcionalidad.
 En cambio el administrador puede entrar en un CRUD de administración, en el cual se muestran todos los datos de la aplicación.
 Existe un bloqueo para que los usuarios que no tengan permisos, no puedan acceder al área administrativa. (403)
-También existe un método el cual muestra una página de error 404 cuando se intruoduce un método que no exista.
+También existe un método el cual muestra una página de error 404 cuando se introduce un método que no exista.
 
 
 ## Páginas
